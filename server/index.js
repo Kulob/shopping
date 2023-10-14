@@ -49,7 +49,10 @@ app.use("/uploads", express.static("uploads"));
 //   UserController.register
 // );
 app.use('/api/auth',authRouter)
-app.get("/auth/me", checkAuth, UserController.getMe);
+// app.get("/auth/me", checkAuth, UserController.getMe);
+app.use('/', (req,res) => {
+  res.send('Server is running')
+});
 
 app.listen(5002, (err) => {
   if (err) {
