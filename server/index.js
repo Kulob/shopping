@@ -2,10 +2,7 @@ import express from "express";
 import multer from "multer";
 import cors from "cors";
 import mongoose from "mongoose";
-import { registerValidation, loginValidation } from "./validations.js";
-import checkAuth from "./utils/checkAuth.js";
-import * as UserController from "./controllers/UserController.js";
-import handleValidationErrors from "./utils/handleValidationErrors.js";
+import dotenv from 'dotenv';
 import authRouter from './routes/auth.js'
 
 mongoose.set("strictQuery", false);
@@ -28,33 +25,22 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage });
-
-// app.use(bodyParser.urlencoded({ extended: true }));
+dotenv.config();
+const port = process.env.PORT;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use("/uploads", express.static("uploads"));
 
-// app.post(
-//   "/auth/login",
-//   loginValidation,
-//   handleValidationErrors,
-//   UserController.login
-// );
-// app.post(
-//   "/auth/register",
-//   registerValidation,
-//   handleValidationErrors,
-//   UserController.register
-// );
+
 app.use('/api/auth',authRouter)
 // app.get("/auth/me", checkAuth, UserController.getMe);
 app.use('/', (req,res) => {
   res.send('Server is running')
 });
 
-app.listen(5002, (err) => {
+app.listen(port, (err) => {
   if (err) {
     return console.log(err);
   }
