@@ -35,12 +35,11 @@ app.use("/uploads", express.static("uploads"));
 
 
 app.use('/api/auth',authRouter)
-// app.get("/auth/me", checkAuth, UserController.getMe);
 app.use('/', (req,res) => {
   res.send('Server is running')
 });
 
-app.listen(port, (err) => {
+app.listen(5002, (err) => {
   if (err) {
     return console.log(err);
   }
