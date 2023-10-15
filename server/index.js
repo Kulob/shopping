@@ -2,7 +2,6 @@ import express from "express";
 import multer from "multer";
 import cors from "cors";
 import mongoose from "mongoose";
-import dotenv from 'dotenv';
 import authRouter from './routes/auth.js'
 
 mongoose.set("strictQuery", false);
@@ -25,8 +24,6 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage });
-dotenv.config();
-const port = process.env.PORT;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
